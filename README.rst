@@ -78,5 +78,10 @@ Notes
 
 This package depends on a fork of ``python-openid`` as the current upstream
 version (2.2.5) does not play well with a Google extension used by Google
-Apps identity provider.
+Apps identity provider. This fork is not listed on PyPi, so you have to include
+the following line in your ``requirements.txt`` to instruct ``pip`` where the
+patched version of ``python-openid`` can be found:
+::
 
+    requirements.txt
+    --find-links https://github.com/Bouke/python-openid/downloads
