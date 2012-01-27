@@ -83,5 +83,5 @@ the following line in your ``requirements.txt`` to instruct ``pip`` where the
 patched version of ``python-openid`` can be found:
 ::
 
-    requirements.txt
+    requirements.txt:
     --find-links https://github.com/Bouke/python-openid/downloads
