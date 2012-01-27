@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-federated-login',
-    version='0.1.2',
+    version='0.1.3',
     author='Bouke Haarsma',
     author_email='bouke@webatoom.nl',
     packages=[
@@ -14,11 +14,10 @@ setup(
     license='MIT',
     long_description=open('README.rst').read(),
     dependency_links=[
-        'http://github.com/adieu/python-openid/tarball/03773fb96dff352bbda12538'
-        '726dc5c46fe0316c#egg=python-openid',],
+        'http://github.com/Bouke/python-openid/downloads',
+    ],
     install_requires=[
-        'python-openid == 2.2.5',
-        'Django >= 1.3.0',
+        'python-openid == 2.2.5-bouke0',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
