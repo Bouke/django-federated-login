@@ -67,7 +67,7 @@ These are the customizable settings:
 ``FL_CREATE_USERS`` (Default: ``False``)
     Whether to create a user account when unknown e-mail address is presented.
 
-``FL_USER_FACTORY`` (Default: ``'aba.utils.fl_user_factory'``)
+``FL_USER_FACTORY`` (Default: ``'federated_login.auth.user_factory'``)
     Function that is called when creating a user account.
 
 ``FL_SSO_ENDPOINT`` (Default: Google Apps)
