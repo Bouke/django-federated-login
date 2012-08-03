@@ -20,3 +20,6 @@ FL_CREATE_USERS = getattr(settings, 'FL_CREATE_USERS', False)
 # @todo look if signals can provide the same flexibility
 FL_USER_FACTORY = getattr(settings, 'FL_USER_FACTORY',
                           'federated_login.auth.user_factory')
+
+FL_USER_CLASS = getattr(settings, 'FL_USER_CLASS',
+                         'django.contrib.auth.models.User')
