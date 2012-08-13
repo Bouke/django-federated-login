@@ -73,6 +73,9 @@ These are the customizable settings:
 ``FL_SSO_ENDPOINT`` (Default: Google Apps)
     Override this setting to link with another OpenID identity provider.
 
+``FL_USER_CLASS`` (Default: ``'django.contrib.auth.models.User'``)
+    Django model class to used to create and query for users.
+
 Notes
 =====
 
