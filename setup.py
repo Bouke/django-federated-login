@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-federated-login',
-    version='0.1.3',
+    version='0.1.4',
     author='Bouke Haarsma',
     author_email='bouke@webatoom.nl',
     packages=[
