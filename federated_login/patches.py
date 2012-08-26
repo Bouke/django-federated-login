@@ -20,13 +20,11 @@ from openid import oidutil
 def monkeypatch_method(cls):
     def decorator(func):
         setattr(cls, func.__name__, func)
-        print 'override', cls, func.__name__, func
         return func
     return decorator
 
 @monkeypatch_method(consumer.GenericConsumer)
 def _verifyDiscoveryResultsOpenID2(self, resp_msg, endpoint):
-    print 'inside patched function!'
     to_match = OpenIDServiceEndpoint()
     to_match.type_uris = [OPENID_2_0_TYPE]
     to_match.claimed_id = resp_msg.getArg(OPENID2_NS, 'claimed_id')
@@ -102,8 +100,6 @@ def _verifyDiscoverySingle(self, endpoint, to_match):
     @raises consumer.ProtocolError: when the endpoint does not match the
         discovered information.
     """
-    print 'inside patched function!'
-
     # Every type URI that's in the to_match endpoint has to be
     # present in the discovered endpoint.
     for type_uri in to_match.type_uris:
