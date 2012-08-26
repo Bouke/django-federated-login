@@ -54,7 +54,14 @@ Usage
 =====
 
 Point your browser to ``/federated/login/``. You might want to include a
-button to this url on the regular login page.
+button to this url on the regular login page. You could also use the federated
+login page as the default login page, replacing the username and password login
+pages. To do this, configure the ``LOGIN_`` settings:
+::
+
+    settings.py:
+    LOGIN_REDIRECT_URL = '/'
+    LOGIN_URL = '/federated/login/'
 
 Extra settings
 ==============
