@@ -1,7 +1,8 @@
+import logging
 import urllib
 
 from django.conf import settings
-from django.contrib import messages, auth
+from django.contrib import auth
 from django.core.exceptions import MultipleObjectsReturned, ValidationError
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -14,6 +15,8 @@ from openid.store.memstore import MemoryStore
 from federated_login import FL_SSO_ENDPOINT, patches
 
 __all__ = ['login', 'identity']
+
+logger = logging.getLogger(__name__)
 
 def create_consumer(request):
     """
@@ -79,17 +82,17 @@ def identity(request, **kwargs):
                                                   settings.LOGIN_REDIRECT_URL)
                 return HttpResponseRedirect(redirect_to)
             elif user:
-                messages.error(request, 'User account is not active', fail_silently=True)
+                logger.warning('User account is not active')
             else:
-                messages.error(request, 'No user record found', fail_silently=True)
+                logger.warning('No user record found')
         except MultipleObjectsReturned:
-            messages.error(request, 'Multiple user records found', fail_silently=True)
+            logger.warning('Multiple user records found')
         except ValidationError, err:
-            messages.error(request, ', '.join(err.messages), fail_silently=True)
+            logger.warning(', '.join(err.messages))
     elif auth_res.status == FAILURE:
-        messages.error(request, 'Authentication failed: %s' % auth_res.message, fail_silently=True)
+        logger.warning('Authentication failed: %s' % auth_res.message)
     elif auth_res.status == CANCEL:
-        messages.error(request, 'Authentication canceled', fail_silently=True)
+        logger.warning('Authentication canceled')
     else:
         raise Exception, 'Unknown OpenID result: %s' % auth_res.status
 
