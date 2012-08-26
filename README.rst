@@ -63,8 +63,8 @@ pages. To do this, configure the ``LOGIN_`` settings:
     LOGIN_REDIRECT_URL = '/'
     LOGIN_URL = '/federated/login/'
 
-Extra settings
-==============
+Settings
+========
 
 These are the customizable settings:
 
@@ -75,10 +75,14 @@ These are the customizable settings:
     Whether to create a user account when unknown e-mail address is presented.
 
 ``FL_USER_FACTORY`` (Default: ``'federated_login.auth.user_factory'``)
-    Function that is called when creating a user account.
+    Function that is called when creating a user account. This user factory
+    creates users with super admin privileges, provide a custom factory to
+    change this behaviour.
 
 ``FL_SSO_ENDPOINT`` (Default: Google Apps)
-    Override this setting to link with another OpenID identity provider.
+    Override this setting to link with another OpenID identity provider. The
+    ``FL_APPS_DOMAIN`` setting will have no effect when providing a custom
+    ``FL_SSO_ENDPOINT``.
 
 ``FL_USER_CLASS`` (Default: ``'django.contrib.auth.models.User'``)
     Django model class to used to create and query for users.
