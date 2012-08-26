@@ -11,7 +11,7 @@ from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, CANCEL
 from openid.extensions import ax
 from openid.store.memstore import MemoryStore
 
-from federated_login import FL_SSO_ENDPOINT
+from federated_login import FL_SSO_ENDPOINT, patches
 
 __all__ = ['login', 'identity']
 

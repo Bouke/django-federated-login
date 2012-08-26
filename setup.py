@@ -13,11 +13,8 @@ setup(
     description='Provides federated logins to django projects',
     license='MIT',
     long_description=open('README.rst').read(),
-    dependency_links=[
-        'http://github.com/Bouke/python-openid/downloads',
-    ],
     install_requires=[
-        'python-openid == 2.2.5-bouke0',
+        'python-openid == 2.2.5',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
