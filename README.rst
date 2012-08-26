@@ -20,15 +20,6 @@ Installation with ``pip``:
 
     $ pip install django-federated-login
 
-Add ``'federated_login'`` to your list of installed apps:
-::
-
-    settings.py:
-    INSTALLED_APPS = (
-        ...
-        'federated_login',
-    )
-
 Add ``'federated_login.auth.backend.EmailBackend'`` as authentication backend:
 ::
 
