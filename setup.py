@@ -1,14 +1,12 @@
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
     name='django-federated-login',
-    version='0.2.0',
+    version='0.3.0',
     author='Bouke Haarsma',
     author_email='bouke@webatoom.nl',
-    packages=[
-        'federated_login',
-        'federated_login.auth'
-    ],
+    packages=find_packages(),
     url='http://github.com/Bouke/django-federated-login',
     description='Provides federated logins to django projects',
     license='MIT',
