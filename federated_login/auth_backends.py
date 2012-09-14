@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
 from openid.extensions import ax
 from django.core.exceptions import ValidationError
-
-from federated_login import FL_CREATE_USERS, FL_USER_FACTORY, FL_USER_CLASS
+from federated_login import UserClass, UserFactory
 
 __all__ = ['EmailBackend']
-
-module, func_name = FL_USER_CLASS.rsplit('.', 1)
-module = __import__(module, fromlist=[module])
-UserClass = getattr(module, func_name)
-
 
 class EmailBackend(object):
     """
@@ -30,15 +23,15 @@ class EmailBackend(object):
         try:
             return UserClass.objects.get(email=email)
         except UserClass.DoesNotExist:
-            if not FL_CREATE_USERS:
-                raise
+            pass
 
-        first_name = fetch_res.getSingle('http://axschema.org/namePerson/first')
-        last_name = fetch_res.getSingle('http://axschema.org/namePerson/last')
+        if UserFactory:
+            first_name = fetch_res.getSingle('http://axschema.org/namePerson/first')
+            last_name = fetch_res.getSingle('http://axschema.org/namePerson/last')
 
-        return create_user(email=email,
-                           first_name=first_name,
-                           last_name=last_name)
+            return create_user(email=email,
+                               first_name=first_name,
+                               last_name=last_name)
 
     def get_user(self, user_id):
         try:
@@ -58,8 +51,5 @@ def create_user(first_name, last_name, **kwargs):
         username = '%s.%s.%s' % (first_name[0].lower(), last_name.lower(),
                                  suffix)
         suffix += 1
-
-    module, func_name = FL_USER_FACTORY.rsplit('.', 1)
-    module = __import__(module, fromlist=[module])
-    return getattr(module, func_name)(username=username, first_name=first_name,
-                                      last_name=last_name, **kwargs)
+    return UserFactory(username=username, first_name=first_name,
+                       last_name=last_name, **kwargs)

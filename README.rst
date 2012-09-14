@@ -20,12 +20,12 @@ Installation with ``pip``:
 
     $ pip install django-federated-login
 
-Add ``'federated_login.auth.backend.EmailBackend'`` as authentication backend:
+Add ``'federated_login.auth_backend.EmailBackend'`` as authentication backend:
 ::
 
     settings.py:
     AUTHENTICATION_BACKENDS = (
-        'federated_login.auth.backends.EmailBackend',
+        'federated_login.auth_backends.EmailBackend',
         'django.contrib.auth.backends.ModelBackend',
     )
 
@@ -60,15 +60,13 @@ Settings
 These are the customizable settings:
 
 ``FL_APPS_DOMAIN``
-    Google Apps domain to identify against.
+    Google Apps domain to identify against. Can be overriden by
+    ``FL_SSO_ENDPOINT``.
 
-``FL_CREATE_USERS`` (Default: ``False``)
-    Whether to create a user account when unknown e-mail address is presented.
-
-``FL_USER_FACTORY`` (Default: ``'federated_login.auth.user_factory'``)
-    Function that is called when creating a user account. This user factory
-    creates users with super admin privileges, provide a custom factory to
-    change this behaviour.
+``FL_USER_FACTORY`` (Default: ``'federated_login.user_factories.normal'``)
+    Function that is called when creating a user account. Set to `None` to
+    disable creation of new users. There is also
+    ``''federated_login.user_factories.normal'`` that creates superusers.
 
 ``FL_SSO_ENDPOINT`` (Default: Google Apps)
     Override this setting to link with another OpenID identity provider. The
