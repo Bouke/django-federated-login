@@ -1,22 +1,16 @@
-import logging
 import urllib
-
 from django.conf import settings
 from django.contrib import auth
-from django.core.exceptions import MultipleObjectsReturned, ValidationError
+from django.core.exceptions import MultipleObjectsReturned, ValidationError, ImproperlyConfigured
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
-
 from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, CANCEL
 from openid.extensions import ax
 from openid.store.memstore import MemoryStore
-
 from federated_login import FL_SSO_ENDPOINT, patches
 
 __all__ = ['login', 'identity']
-
-logger = logging.getLogger(__name__)
 
 def create_consumer(request):
     """
@@ -82,19 +76,23 @@ def identity(request, **kwargs):
                                                   settings.LOGIN_REDIRECT_URL)
                 return HttpResponseRedirect(redirect_to)
             elif user:
-                logger.warning('User account is not active')
+                print('User account is not active')
             else:
-                logger.warning('No user record found')
+                print('No user record found')
         except MultipleObjectsReturned:
-            logger.warning('Multiple user records found')
+            print('Multiple user records found')
         except ValidationError, err:
-            logger.warning(', '.join(err.messages))
+            print(', '.join(err.messages))
     elif auth_res.status == FAILURE:
-        logger.warning('Authentication failed: %s' % auth_res.message)
+        print('Authentication failed: %s' % auth_res.message)
     elif auth_res.status == CANCEL:
-        logger.warning('Authentication canceled')
+        print('Authentication canceled')
     else:
         raise Exception, 'Unknown OpenID result: %s' % auth_res.status
 
     # There was some exception, return the user to the default login page
-    return HttpResponseRedirect(settings.LOGIN_URL)
+    if settings.LOGIN_URL != reverse(login):
+        return HttpResponseRedirect(settings.LOGIN_URL)
+
+    # Check if UserFactory is working, it might be failing
+    raise ImproperlyConfigured('Failed login resulting in a redirect loop')
