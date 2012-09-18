@@ -54,6 +54,9 @@ pages. To do this, configure the ``LOGIN_`` settings:
     LOGIN_REDIRECT_URL = '/'
     LOGIN_URL = '/federated/login/'
 
+    urls.py:
+    from federated_login import patch_admin
+
 Settings
 ========
 
