@@ -1,14 +1,28 @@
 from federated_login import UserClass
 
+def __create(**kwargs):
+    user = UserClass(**kwargs)
+    user.set_unusable_password()
+    user.save()
+    return user
+
 def normal(**kwargs):
     """
-    Returns a new user with the given arguments.
+    Creates a normal user
     """
-    return UserClass.objects.create(**kwargs)
+    return __create(**kwargs)
+
+def staff(**kwargs):
+    """
+    Creates a staff user
+    """
+    kwargs['is_staff'] = True
+    return __create(**kwargs)
 
 def superuser(**kwargs):
     """
-    Returns a new user with the given arguments.
+    Creates a superuser
     """
+    kwargs['is_staff'] = True
     kwargs['is_superuser'] = True
-    return UserClass.objects.create(**kwargs)
+    return __create(**kwargs)

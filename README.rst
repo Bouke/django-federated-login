@@ -69,7 +69,8 @@ These are the customizable settings:
 ``FL_USER_FACTORY`` (Default: ``'federated_login.user_factories.normal'``)
     Function that is called when creating a user account. Set to `None` to
     disable creation of new users. There is also
-    ``''federated_login.user_factories.normal'`` that creates superusers.
+    ``'federated_login.user_factories.staff'`` that creates staff users and
+    ``'federated_login.user_factories.superuser'`` that creates superusers.
 
 ``FL_SSO_ENDPOINT`` (Default: Google Apps)
     Override this setting to link with another OpenID identity provider. The
