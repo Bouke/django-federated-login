@@ -50,6 +50,13 @@ Register the views:
     urls.py:
     url(r'^federated/', include('federated_login.urls')),
 
+Sync or migrate your database:
+::
+
+    python manage.py syncdb
+    # or if you use South:
+    python manage.py migrate federated_login
+
 Usage
 =====
 
