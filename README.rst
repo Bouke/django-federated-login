@@ -29,6 +29,15 @@ Add ``'federated_login.auth_backend.EmailBackend'`` as authentication backend:
         'django.contrib.auth.backends.ModelBackend',
     )
 
+Add ``'federated_login'`` as installed app:
+::
+
+    settings.py:
+    INSTALLED_APPS = (
+        ...
+        'federated_login',
+    )
+
 Provide the Google Apps domain to identify against:
 ::
 

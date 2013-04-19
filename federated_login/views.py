@@ -8,19 +8,20 @@ from django.views.decorators.csrf import csrf_exempt
 from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, CANCEL
 from openid.extensions import ax
 from openid.store.memstore import MemoryStore
+from openid.store.filestore import FileOpenIDStore
+
 from federated_login import FL_SSO_ENDPOINT, patches
+from .store import DjangoOpenIDStore
+
 
 __all__ = ['login', 'identity']
 
 def create_consumer(request):
     """
     Returns an OpenID Consumer.
-
-    As there is only one identity server, the current transactions can safely
-    be stored in memory.
     """
     return Consumer(request.session.setdefault('openid', {}),
-                    MemoryStore())
+                    DjangoOpenIDStore())
 
 def login(request, **kwargs):
     """
