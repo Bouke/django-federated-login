@@ -15,13 +15,11 @@ optionally be created.
 Installation
 ============
 
-Installation with ``pip``:
-::
+Installation with ``pip``::
 
     $ pip install django-federated-login
 
-Add ``'federated_login.auth_backend.EmailBackend'`` as authentication backend:
-::
+Add ``'federated_login.auth_backend.EmailBackend'`` as authentication backend::
 
     settings.py:
     AUTHENTICATION_BACKENDS = (
@@ -29,8 +27,7 @@ Add ``'federated_login.auth_backend.EmailBackend'`` as authentication backend:
         'django.contrib.auth.backends.ModelBackend',
     )
 
-Add ``'federated_login'`` as installed app:
-::
+Add ``'federated_login'`` as installed app::
 
     settings.py:
     INSTALLED_APPS = (
@@ -38,20 +35,22 @@ Add ``'federated_login'`` as installed app:
         'federated_login',
     )
 
-Provide the Google Apps domain to identify against:
-::
+Provide the Google Apps domain to identify against::
 
     settings.py:
     FL_APPS_DOMAIN = 'webatoom.nl'
 
-Register the views:
-::
+For Django 1.6, need to configure session serializer::
+
+    settings.py:
+    SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+Register the views::
 
     urls.py:
     url(r'^federated/', include('federated_login.urls')),
 
-Sync or migrate your database:
-::
+Sync or migrate your database::
 
     python manage.py syncdb
     # or if you use South:

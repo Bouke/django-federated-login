@@ -1,4 +1,5 @@
 import urllib
+import django
 from django.conf import settings
 from django.contrib import auth
 from django.core.exceptions import MultipleObjectsReturned, ValidationError, ImproperlyConfigured
@@ -20,6 +21,12 @@ def create_consumer(request):
     """
     Returns an OpenID Consumer.
     """
+    if django.VERSION >= (1, 6):
+        serializer = 'django.contrib.sessions.serializers.PickleSerializer'
+        if settings.SESSION_SERIALIZER != serializer:
+            raise ImproperlyConfigured('SESSION_SERIALIZER must be set '
+                                       'to `%s`' % serializer)
+
     return Consumer(request.session.setdefault('openid', {}),
                     DjangoOpenIDStore())
 

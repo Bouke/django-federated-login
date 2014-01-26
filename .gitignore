@@ -2,3 +2,4 @@ build/
 MANIFEST
 dist/
 .ropeproject/
+/django_federated_login.egg-info/

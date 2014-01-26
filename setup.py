@@ -12,6 +12,7 @@ setup(
     license='MIT',
     long_description=open('README.rst').read(),
     install_requires=[
+        'Django>=1.4.2,<1.7',
         'python-openid == 2.2.5',
     ],
     classifiers=[

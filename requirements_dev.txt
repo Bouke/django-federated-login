@@ -1,0 +1,24 @@
+# The app itself
+
+-e .
+
+# Runtime dependencies
+
+Django
+python-openid
+
+# Example app
+
+South
+django-debug-toolbar
+
+# Testing
+
+coverage
+flake8
+tox
+
+# Documentation
+
+Sphinx
+sphinx_rtd_theme
