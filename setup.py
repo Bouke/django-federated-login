@@ -3,8 +3,8 @@ import sys
 from distutils.core import setup
 from setuptools import find_packages
 
-install_requires=[
-    'Django>=1.4.2,<1.7',
+install_requires = [
+    'Django >=1.4.2, <1.7',
 ]
 
 if sys.version_info > (3,):
@@ -14,12 +14,12 @@ else:
 
 setup(
     name='django-federated-login',
-    version='0.4.0',
+    version='1.0.0',
     author='Bouke Haarsma',
     author_email='bouke@webatoom.nl',
     packages=find_packages(),
     url='http://github.com/Bouke/django-federated-login',
-    description='Provides federated logins to django projects',
+    description='Provides federated login (SSO) to Django projects',
     license='MIT',
     long_description=open('README.rst').read(),
     install_requires=install_requires,
