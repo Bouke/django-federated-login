@@ -5,7 +5,11 @@
 # Runtime dependencies
 
 Django
-python-openid
+
+# Install either python-openid or python3-openid depending on your version
+# of Python.
+# python-openid
+# python3-openid
 
 # Example app
 

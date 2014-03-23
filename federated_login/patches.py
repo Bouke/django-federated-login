@@ -8,7 +8,12 @@
 # https://sites.google.com/site/oauthgoog/fedlogininterp/openiddiscovery
 
 import copy
-from urlparse import urldefrag
+
+try:
+    from urllib.parse import urldefrag, quote_plus
+except ImportError:
+    from urlparse import urldefrag
+    from urllib import quote_plus
 
 from openid.consumer import consumer
 from openid.consumer.discover import OpenIDServiceEndpoint, OPENID_2_0_TYPE
@@ -51,9 +56,8 @@ def _verifyDiscoveryResultsOpenID2(self, resp_msg, endpoint):
     # again. This covers not using sessions, OP identifier
     # endpoints and responses that didn't match the original
     # request.
-    if to_match.server_url.startswith(u'https://www.google.com/a/'):
-        import urllib
-        claimed_id = u'https://www.google.com/accounts/o8/user-xrds?uri=%s' % urllib.quote_plus(to_match.claimed_id)
+    if to_match.server_url.startswith('https://www.google.com/a/'):
+        claimed_id = 'https://www.google.com/accounts/o8/user-xrds?uri=%s' % quote_plus(to_match.claimed_id)
     else:
         claimed_id = to_match.claimed_id
 
@@ -66,7 +70,7 @@ def _verifyDiscoveryResultsOpenID2(self, resp_msg, endpoint):
         # case.
         try:
             self._verifyDiscoverySingle(endpoint, to_match)
-        except consumer.ProtocolError, e:
+        except consumer.ProtocolError as e:
             oidutil.log(
                 "Error attempting to use stored discovery information: " +
                 str(e))
@@ -103,9 +107,8 @@ def _verifyDiscoverySingle(self, endpoint, to_match):
 
     # Fragments do not influence discovery, so we can't compare a
     # claimed identifier with a fragment to discovered information.
-    if to_match.server_url.startswith(u'https://www.google.com/a/'):
-        import urllib
-        claimed_id = u'https://www.google.com/accounts/o8/user-xrds?uri=%s' % urllib.quote_plus(to_match.claimed_id)
+    if to_match.server_url.startswith('https://www.google.com/a/'):
+        claimed_id = 'https://www.google.com/accounts/o8/user-xrds?uri=%s' % quote_plus(to_match.claimed_id)
     else:
         claimed_id = to_match.claimed_id
 
@@ -116,9 +119,8 @@ def _verifyDiscoverySingle(self, endpoint, to_match):
             'Expected %s, got %s' %
             (defragged_claimed_id, endpoint.claimed_id))
 
-    if to_match.server_url.startswith(u'https://www.google.com/a/'):
-        import urllib
-        local_id = u'https://www.google.com/accounts/o8/user-xrds?uri=%s' % urllib.quote_plus(to_match.local_id)
+    if to_match.server_url.startswith('https://www.google.com/a/'):
+        local_id = 'https://www.google.com/accounts/o8/user-xrds?uri=%s' % quote_plus(to_match.local_id)
     else:
         local_id =  to_match.getLocalID()
 

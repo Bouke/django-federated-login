@@ -56,7 +56,7 @@ def login(request, **kwargs):
     if future_redirect != '':
         future_redirect = urllib.urlencode({
             auth.REDIRECT_FIELD_NAME: future_redirect})
-        return_to = u'%s?%s' % (return_to, future_redirect)
+        return_to = '%s?%s' % (return_to, future_redirect)
 
     return HttpResponseRedirect(auth_req.redirectURL(realm, return_to))
 
@@ -89,14 +89,14 @@ def identity(request, **kwargs):
                 print('No user record found')
         except MultipleObjectsReturned:
             print('Multiple user records found')
-        except ValidationError, err:
+        except ValidationError as err:
             print(', '.join(err.messages))
     elif auth_res.status == FAILURE:
         print('Authentication failed: %s' % auth_res.message)
     elif auth_res.status == CANCEL:
         print('Authentication canceled')
     else:
-        raise Exception, 'Unknown OpenID result: %s' % auth_res.status
+        raise RuntimeError('Unknown OpenID result: %s' % auth_res.status)
 
     # There was some exception, return the user to the default login page
     if settings.LOGIN_URL != reverse(login):

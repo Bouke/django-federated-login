@@ -12,9 +12,8 @@ The provided backend matches users based on the e-mail address returned from
 the identity provider. If no matching user could be found, a user account can
 optionally be created.
 
-Compatible with Django 1.4, 1.5 and 1.6 on Python 2.6 and 2.7. Python 3 might
-be supported in the future, as python-openid is forked as python3-openid with
-Python 3 support.
+Compatible with Django 1.4, 1.5 and 1.6 on Python 2.6, 2.7, 3.2 and 3.3. Python
+3 is supported through the python3-openid fork.
 
 Installation
 ============

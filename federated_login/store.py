@@ -14,7 +14,6 @@ class DjangoOpenIDStore(OpenIDStore):
             assoc = Association.objects.get(**kwargs)
         except Association.DoesNotExist:
             assoc = Association(**kwargs)
-        print 'secret?', assoc.secret
         assoc.secret = base64.encodestring(association.secret)
         assoc.issued = association.issued
         assoc.lifetime = association.lifetime
@@ -38,12 +37,12 @@ class DjangoOpenIDStore(OpenIDStore):
         openid_assocs = []
         for assoc in Association.objects.filter(**kwargs).order_by('-issued'):
             openid_assoc = OpenidAssociation(assoc.handle,
-                                             base64.decodestring(assoc.secret),
+                                             base64.decodestring(assoc.secret.encode('ascii')),
                                              assoc.issued,
                                              assoc.lifetime,
                                              assoc.assoc_type)
 
-            if openid_assoc.getExpiresIn() > 0:
+            if openid_assoc.expiresIn > 0:
                 openid_assocs.append(openid_assoc)
             else:
                 assoc.delete()
