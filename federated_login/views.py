@@ -1,21 +1,21 @@
 import urllib
+
 import django
 from django.conf import settings
 from django.contrib import auth
 from django.core.exceptions import MultipleObjectsReturned, ValidationError, ImproperlyConfigured
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from openid.consumer.consumer import Consumer, SUCCESS, FAILURE, CANCEL
 from openid.extensions import ax
-from openid.store.memstore import MemoryStore
-from openid.store.filestore import FileOpenIDStore
 
-from federated_login import FL_SSO_ENDPOINT, patches
+from . import FL_SSO_ENDPOINT
 from .store import DjangoOpenIDStore
 
 
 __all__ = ['login', 'identity']
+
 
 def create_consumer(request):
     """
@@ -29,6 +29,7 @@ def create_consumer(request):
 
     return Consumer(request.session.setdefault('openid', {}),
                     DjangoOpenIDStore())
+
 
 def login(request, **kwargs):
     """
@@ -59,6 +60,7 @@ def login(request, **kwargs):
         return_to = '%s?%s' % (return_to, future_redirect)
 
     return HttpResponseRedirect(auth_req.redirectURL(realm, return_to))
+
 
 @csrf_exempt
 def identity(request, **kwargs):

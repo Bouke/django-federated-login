@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, include, url
-
 from django.contrib import admin
-from example.views import HomeView, ExampleSecretView
-import federated_login
 
+from .views import HomeView, ExampleSecretView
 
 admin.autodiscover()
 

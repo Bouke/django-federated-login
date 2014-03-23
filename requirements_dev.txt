@@ -21,8 +21,3 @@ django-debug-toolbar
 coverage
 flake8
 tox
-
-# Documentation
-
-Sphinx
-sphinx_rtd_theme

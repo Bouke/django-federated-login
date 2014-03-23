@@ -16,6 +16,7 @@ elif hasattr(settings, 'FL_APPS_DOMAIN'):
 else:
     raise ImproperlyConfigured('FL_SSO_ENDPOINT or FL_APPS_DOMAIN not set')
 
+
 def get_class(name):
     if name:
         module, func_name = name.rsplit('.', 1)
@@ -23,7 +24,7 @@ def get_class(name):
         return getattr(module, func_name)
 
 UserClass = get_class(getattr(settings, 'FL_USER_CLASS',
-    'django.contrib.auth.models.User'))
+                              'django.contrib.auth.models.User'))
 
 UserFactory = get_class(getattr(settings, 'FL_USER_FACTORY',
-    'federated_login.user_factories.normal'))
+                                'federated_login.user_factories.normal'))

@@ -4,6 +4,7 @@ from federated_login import UserClass, UserFactory
 
 __all__ = ['EmailBackend']
 
+
 class EmailBackend(object):
     """
     Authenticate users based on a remotely verified e-mail address.
