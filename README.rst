@@ -2,6 +2,18 @@
 Django Federated Login
 ======================
 
+.. image:: https://travis-ci.org/Bouke/django-federated-login.png?branch=master
+    :alt: Build Status
+    :target: https://travis-ci.org/Bouke/django-federated-login
+
+.. image:: https://coveralls.io/repos/Bouke/django-federated-login/badge.png?branch=master
+    :alt: Test Coverage
+    :target: https://coveralls.io/r/Bouke/django-federated-login?branch=master
+
+.. image:: https://badge.fury.io/py/django-federated-login.png
+    :alt: PyPI
+    :target: https://pypi.python.org/pypi/django-federated-login
+
 Django Federated Login provides an authentication bridge between Django
 projects and OpenID-enabled identity providers. The bridge is pre-wired to be
 used with a single Google Apps domain, but could be extended to be linked with
@@ -11,6 +23,10 @@ this consumer only allows connecting to a pre-defined identity provider.
 The provided backend matches users based on the e-mail address returned from
 the identity provider. If no matching user could be found, a user account can
 optionally be created.
+
+I would love to hear your feedback on this package. If you run into
+problems, please file an issue on GitHub, or contribute to the project by
+forking the repository and sending some pull requests.
 
 Compatible with Django 1.4, 1.5 and 1.6 on Python 2.6, 2.7, 3.2 and 3.3. Python
 3 is supported through the python3-openid fork.
