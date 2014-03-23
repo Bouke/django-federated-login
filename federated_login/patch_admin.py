@@ -1,11 +1,5 @@
-from django.conf import settings
-from django.contrib.admin import sites
+import warnings
 
-#monkey-patch admin login
-from django.shortcuts import redirect
-
-
-def redirect_admin_login(self, request):
-    return redirect(settings.LOGIN_URL)
-
-sites.AdminSite.login = redirect_admin_login
+warnings.warn("federeated_login.patch_admin has been deprecated in favor of a "
+              "setting called FL_PATCH_ADMIN, which is set to auto-patch. "
+              "Please update your settings accordingly.", DeprecationWarning)

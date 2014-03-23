@@ -4,7 +4,6 @@ from django.contrib import admin
 from example.views import HomeView, ExampleSecretView
 import federated_login
 
-from federated_login import patch_admin
 
 admin.autodiscover()
 

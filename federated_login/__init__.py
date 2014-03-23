@@ -1,6 +1,9 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
+from . import patches  # noqa
+
+
 __all__ = ['FL_SSO_ENDPOINT', 'auth_backends', 'urls', 'views', 'UserClass',
            'UserFactory', 'user_factories']
 

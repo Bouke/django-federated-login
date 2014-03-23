@@ -73,8 +73,6 @@ pages. To do this, configure the ``LOGIN_`` settings:
     LOGIN_REDIRECT_URL = '/'
     LOGIN_URL = '/federated/login/'
 
-    urls.py:
-    from federated_login import patch_admin
 
 Settings
 ========
@@ -98,3 +96,10 @@ These are the customizable settings:
 
 ``FL_USER_CLASS`` (Default: ``'django.contrib.auth.models.User'``)
     Django model class to used to create and query for users.
+
+``FL_PATCH_ADMIN`` (Default: ``True``)
+    Django's admin site is automatically patched to use federated login. Set
+    this setting to ``False`` to disable this feature. You can call
+    ``federated_login.admin.patch_admin()`` and
+    ``federated_login.admin.unpatch_admin()`` to respectively patch and
+    unpatch the admin site.

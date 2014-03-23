@@ -15,13 +15,8 @@ from openid.consumer.discover import OpenIDServiceEndpoint, OPENID_2_0_TYPE
 from openid.message import OPENID2_NS, OPENID1_NS, no_default
 from openid import oidutil
 
-# decorator by Guido
-# http://mail.python.org/pipermail/python-dev/2008-January/076194.html
-def monkeypatch_method(cls):
-    def decorator(func):
-        setattr(cls, func.__name__, func)
-        return func
-    return decorator
+from .utils import monkeypatch_method
+
 
 @monkeypatch_method(consumer.GenericConsumer)
 def _verifyDiscoveryResultsOpenID2(self, resp_msg, endpoint):
